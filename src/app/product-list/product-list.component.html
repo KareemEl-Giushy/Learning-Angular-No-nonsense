@@ -2,3 +2,25 @@
 <span>{{ html }}</span> <br />
 <span [innerHTML]="html"></span><br />
 <span>{{ text }}</span><br />
+<p [attr.arial-text]="myText"></p>
+<p [innerText]="'This is Text'"></p>
+<span [class.star]="isLiked">Prodcut</span>
+<p [class]="currentClasses">HH</p>
+<p [style.color]="'greenyellow'">ddd</p>
+<p [style.width.px]="1000">11</p>
+<p [style]="currentStyles">fff</p>
+
+<button (click)="onClick()">Click Me</button>
+
+
+<h2>Product List</h2>
+<ul>
+<li (click)="selectedProduct = 'Webcam'">Webcam</li>
+<li (click)="selectedProduct = 'Microphone'">Microphone</li>
+<li (click)="selectedProduct = 'Wireless Keyboard'">Wireless
+Keyboard</li>
+</ul>
+
+
+<app-product-detail #product [proD]="selectedProduct" (selected)="onAddItem($event)"></app-product-detail>
+<span>{{ product.proD }}</span>
