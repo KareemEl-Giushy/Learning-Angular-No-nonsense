@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ProductDetailComponent } from '../products/product-detail/product-detail.component';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements AfterViewInit {
   text: string = "Hello World!";
   html: string = "<strong>BBB</strong>";
   myText: string = "Helllll";
@@ -19,6 +20,14 @@ export class ProductListComponent {
     fontSize: "30px",
   }
   selectedProduct: string = "";
+
+  @ViewChild(ProductDetailComponent) productDetail: ProductDetailComponent | undefined;
+
+  ngAfterViewInit(): void {
+    if (this.productDetail) {
+      console.log(`from after view init: ${this.productDetail.proD}`);
+    }
+  }
 
   onClick(): void {
     console.info("Hello World");
