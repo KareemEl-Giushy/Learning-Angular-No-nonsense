@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, OnInit, OnChanges, SimpleChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-product-detail',
@@ -8,8 +9,9 @@ import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetect
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnInit, OnChanges {
-  @Input() proD = "kareem";
-  @Output() selected: EventEmitter<string> = new EventEmitter();
+  @Input() proD: Product | undefined;
+  @Output() selected: EventEmitter<Product> = new EventEmitter();
+  today: Date = new Date();
 
   constructor() {
     console.log(`${this.proD}`); // prints out "kareem" because no values have been set yet
@@ -21,8 +23,8 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const product = changes['proD'];
     if(!product.isFirstChange()){
-      const oldValue = product.previousValue;
-      const newValue = product.currentValue;
+      const oldValue = product.previousValue.name;
+      const newValue = product.currentValue.name;
       console.log(`Value was changed from ${oldValue} to ${newValue}`);
     }
   }
@@ -31,7 +33,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
     this.selected.emit(this.proD);
   }
   get productName(): string {
-    console.log(`Get ${this.proD}`);
-    return this.proD;
+    console.log(`Get ${this.proD?.name}`);
+    return this.proD?.name ?? "";
   }
 }

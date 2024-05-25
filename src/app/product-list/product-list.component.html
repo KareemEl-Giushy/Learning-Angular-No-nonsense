@@ -15,12 +15,13 @@
 
 <h3>Product List</h3>
 <ul>
-<li (click)="selectedProduct = 'Webcam'">Webcam</li>
-<li (click)="selectedProduct = 'Microphone'">Microphone</li>
-<li (click)="selectedProduct = 'Wireless Keyboard'">Wireless
-Keyboard</li>
+  <li *ngFor="let product of products | slice: 1:3 | sort; let i=index" (click)="selectedProduct = product">{{ i+1 }}. {{ product.name | uppercase }}</li>
 </ul>
 
 
-<app-product-detail #product [proD]="selectedProduct" (selected)="onAddItem($event)"></app-product-detail>
-<span>{{ product.proD }}</span>
+<app-product-detail #product *ngIf="selectedProduct; else paragraphelemet" [proD]="selectedProduct" (selected)="onAddItem($event)"></app-product-detail>
+<!-- <span>{{ product.proD }}</span> -->
+<!-- <p *ngIf="!selectedProduct">No Product Selected</p> -->
+<ng-template #paragraphelemet>
+  <p>No Product Selected</p>
+</ng-template>

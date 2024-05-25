@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import { ProductsModule } from './products/products.module';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ProductsModule } from './products/products.module';
   ],
   imports: [
     BrowserModule,
-    ProductsModule
+    ProductsModule,
+    FilterPipe
   ],
   providers: [],
   bootstrap: [AppComponent]
