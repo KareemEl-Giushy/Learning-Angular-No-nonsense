@@ -1,4 +1,19 @@
-<p>product-detail works!</p>
-<h3>{{ proD }}</h3>
-<button (click)="addItem()">Add Item</button>
-<span>Using a getter: {{ productName }}</span>
+<div *ngIf="proD">
+  <p>product-detail works!</p>
+  <span>{{ 0.125 | percent }}</span>
+  <h3>{{ proD.name }} {{ proD.price | currency:"EUR" }}</h3>
+  <button (click)="addItem()">Add Item</button>
+  <span>Using a getter: {{ productName }}</span>
+  <div [ngSwitch]="proD.name">
+    <p *ngSwitchCase="'WebCam'">Product used for video</p>
+    <p *ngSwitchCase="'Microphone'">Product used for audio</p>
+    <p *ngSwitchDefault>Product is for general use</p>
+  </div>
+  <p>
+    {{ today | date }} <br />
+    {{ today | date:"fullDate" }}
+  </p>
+  <p>
+    {{ proD | json }}
+  </p>
+</div>

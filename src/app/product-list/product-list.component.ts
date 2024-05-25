@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ProductDetailComponent } from '../products/product-detail/product-detail.component';
+import { Product } from '../products/product';
 
 @Component({
   selector: 'app-product-list',
@@ -11,6 +12,20 @@ export class ProductListComponent implements AfterViewInit {
   html: string = "<strong>BBB</strong>";
   myText: string = "Helllll";
   isLiked: boolean = true;
+  products: Product[] = [
+    {
+      name:"WebCam",
+      price: 100
+    },
+    {
+      name:"Microphone",
+      price: 50
+    },
+    {
+      name:"Wireless Keyboard",
+      price: 30
+    }
+  ];
   currentClasses: {} = {
     star: true,
     active: true
@@ -19,7 +34,7 @@ export class ProductListComponent implements AfterViewInit {
     color: "red",
     fontSize: "30px",
   }
-  selectedProduct: string = "";
+  selectedProduct: Product | undefined;
 
   @ViewChild(ProductDetailComponent) productDetail: ProductDetailComponent | undefined;
 
@@ -29,11 +44,30 @@ export class ProductListComponent implements AfterViewInit {
     }
   }
 
+
+  constructor() {
+    this.products = [
+      ...this.products,
+      {
+        name:"WebCam",
+        price: 100
+      },
+      {
+        name:"Microphone",
+        price: 50
+      },
+      {
+        name:"Wireless Keyboard",
+        price: 30
+      }
+    ]
+  }
+
   onClick(): void {
     console.info("Hello World");
   }
 
-  onAddItem(name: string) {
-    window.alert(`You just bought ${name}!`);
+  onAddItem(p: Product) {
+    window.alert(`You just bought ${p.name}!`);
   }
 }
