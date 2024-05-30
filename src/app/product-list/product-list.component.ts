@@ -1,31 +1,21 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { ProductDetailComponent } from '../products/product-detail/product-detail.component';
 import { Product } from '../products/product';
+import { ProductsService } from '../products/products.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
+  providers: [ProductsService],
+
 })
-export class ProductListComponent implements AfterViewInit {
+export class ProductListComponent implements AfterViewInit, OnInit {
   text: string = "Hello World!";
   html: string = "<strong>BBB</strong>";
   myText: string = "Helllll";
   isLiked: boolean = true;
-  products: Product[] = [
-    {
-      name:"WebCam",
-      price: 100
-    },
-    {
-      name:"Microphone",
-      price: 50
-    },
-    {
-      name:"Wireless Keyboard",
-      price: 30
-    }
-  ];
+  products: Product[] = [];
   currentClasses: {} = {
     star: true,
     active: true
@@ -44,23 +34,12 @@ export class ProductListComponent implements AfterViewInit {
     }
   }
 
+  ngOnInit(): void {
+    this.products = this.productService.getProducts();
+  }
 
-  constructor() {
-    this.products = [
-      ...this.products,
-      {
-        name:"WebCam",
-        price: 100
-      },
-      {
-        name:"Microphone",
-        price: 50
-      },
-      {
-        name:"Wireless Keyboard",
-        price: 30
-      }
-    ]
+
+  constructor(private productService: ProductsService) {
   }
 
   onClick(): void {
